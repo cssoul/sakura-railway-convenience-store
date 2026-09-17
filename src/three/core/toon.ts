@@ -23,6 +23,7 @@ export interface ToonOptions {
   opacity?: number
   alphaTest?: number
   side?: THREE.Side
+  vertexColors?: boolean
 }
 
 const cache = new Map<string, THREE.MeshToonMaterial>()
@@ -30,7 +31,7 @@ const allMaterials: THREE.MeshToonMaterial[] = []
 
 /** 带缓存的 toon 材质工厂：同参数共享同一份材质 */
 export function toon(color: number | string, opts: ToonOptions = {}): THREE.MeshToonMaterial {
-  const key = `${color}|${opts.map?.uuid ?? '-'}|${opts.emissive ?? '-'}|${opts.emissiveIntensity ?? '-'}|${opts.transparent ?? '-'}|${opts.opacity ?? '-'}|${opts.alphaTest ?? '-'}|${opts.side ?? '-'}`
+  const key = `${color}|${opts.map?.uuid ?? '-'}|${opts.emissive ?? '-'}|${opts.emissiveIntensity ?? '-'}|${opts.transparent ?? '-'}|${opts.opacity ?? '-'}|${opts.alphaTest ?? '-'}|${opts.side ?? '-'}|${opts.vertexColors ?? '-'}`
   const hit = cache.get(key)
   if (hit) return hit
 
@@ -45,6 +46,7 @@ export function toon(color: number | string, opts: ToonOptions = {}): THREE.Mesh
   if (opts.opacity !== undefined) m.opacity = opts.opacity
   if (opts.alphaTest !== undefined) m.alphaTest = opts.alphaTest
   if (opts.side !== undefined) m.side = opts.side
+  if (opts.vertexColors) m.vertexColors = true
 
   cache.set(key, m)
   allMaterials.push(m)

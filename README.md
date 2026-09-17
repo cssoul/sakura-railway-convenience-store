@@ -6,8 +6,10 @@
 与后方日式住宅串联起一个可以自由旋转观察的「日本春日街角微缩世界」。
 整个场景直接落在水平地面上——不是厚重的沙盘底座。
 
-基于 **Vue 3 + TypeScript + Three.js + Pinia**，全部模型程序化生成
-（无 GLB / 外部贴图），纹理均为 CanvasTexture，动画风格 Toon 渲染。
+基于 **Vue 3 + TypeScript + Three.js + Pinia**。场景全部程序化生成，
+唯一例外是主角樱花树：在 Blender 中以「扭曲曲线主干 + 三级分枝锥形管 +
+花簇 blob + 五瓣花散布」流程建模（`src/three/nature/assets/sakura-tree.json`，
+自定义 JSON 导出），运行时加载并以 Toon 材质渲染，保持整体三渲二风格统一。
 
 ## 运行
 
